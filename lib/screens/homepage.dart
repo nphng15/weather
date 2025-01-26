@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
   List dailyWeatherForecast = [];
 
   //Call API
-  String searchWeatherAPI= "http://api.weatherapi.com/v1/forecast.json?key=" +API_KEY+" &days=7&q=";
+  String searchWeatherAPI= "https://api.weatherapi.com/v1/forecast.json?key=$API_KEY&days=7&q=";
   
   void fetchWeatherData(String searchText) async{
     try{
@@ -91,6 +91,7 @@ class _HomePageState extends State<HomePage> {
     Constants _constants = Constants();
 
     return Scaffold(
+      resizeToAvoidBottomInset : false,
       backgroundColor: Colors.white,
       body: Container(
         width: size.width,
@@ -285,9 +286,9 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 6),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4.0),
+              padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -311,6 +312,7 @@ class _HomePageState extends State<HomePage> {
                 )
               ],),
             ),
+            // SizedBox(height:5),
             SizedBox(
               height: 110,
               child: ListView.builder(
@@ -354,7 +356,7 @@ class _HomePageState extends State<HomePage> {
                             color: _constants.greyColor,
                           )
                         ),
-                        Image.asset('assets/$forecastWeatherIcon',width: 30),
+                        Image.asset('assets/$forecastWeatherIcon',width: 25),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
