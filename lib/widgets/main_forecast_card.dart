@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get.dart';
-
 import '../constants/color_constants.dart';
+import '../widgets/weather_item.dart';
 
 class MainForecastCard extends StatelessWidget {
   final double width;
@@ -11,10 +11,11 @@ class MainForecastCard extends StatelessWidget {
   var dailyWeatherForecast;  
 
   String weatherIcon;
-  int temp;
-  int windSpeed = 0;
-  int humidity = 0;
-  int cloud = 0;
+  String weatherName;
+  int avgTemp;
+  int maxWindSpeed;
+  int avgHumidity;
+  int chanceOfRain;
 
   Constants _constants = Constants();
 
@@ -24,10 +25,11 @@ class MainForecastCard extends StatelessWidget {
     required this.height,
     required this.dailyWeatherForecast,
     required this.weatherIcon,
-    required this.temp,
-    required this.windSpeed,
-    required this.humidity,
-    required this.cloud,
+    required this.weatherName,
+    required this.avgTemp,
+    required this.maxWindSpeed,
+    required this.avgHumidity,
+    required this.chanceOfRain,
   }) : super(key: key);
 
   
@@ -51,7 +53,67 @@ class MainForecastCard extends StatelessWidget {
             ]
             ),
             child: Column(
-              
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(18),
+                          child: SizedBox(
+                            width: 150,
+                            child: Image.asset('assets/$weatherIcon'),
+                          ),
+                        ),
+                        Text('$weatherName',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: _constants.secondaryColor,
+                          ),
+                        )
+                      ],
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(right: 24),
+                      child: Transform.translate(
+                        offset: Offset(0,-20),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                            Text('$avgTemp',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: _constants.secondaryColor,
+                              fontSize: 70,
+                              )
+                            ),
+                            Text('o',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: _constants.secondaryColor,
+                              fontSize: 35,
+                              )
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ]
+                ),
+                SizedBox(height:50),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    WeatherItem(value: maxWindSpeed, unit: 'km/h', imageUrl:'assets/windspeed.png', width: 60, height: 60,),
+                    WeatherItem(value: avgHumidity, unit: '%', imageUrl:'assets/humidity.png', width: 60, height: 60,),
+                    WeatherItem(value: chanceOfRain, unit: '%', imageUrl:'assets/moderaterain.png',  width: 60, height: 60,),
+                  ]
+                ),
+              ],
             ),
           );
   }
