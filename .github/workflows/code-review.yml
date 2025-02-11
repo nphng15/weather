@@ -10,7 +10,8 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+
       - name: "Get diff of the pull request"
         id: get_diff
         shell: bash
@@ -27,9 +28,9 @@ jobs:
             cat "diff.txt";
             echo 'EOF';
           } >> $GITHUB_OUTPUT
-      - uses: ./
-        name: "Code Review by Gemini AI"
-        id: review
+
+      - name: "Code Review by Gemini AI"
+        uses: google-github-actions/gemini-code-review@v1
         with:
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
