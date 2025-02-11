@@ -135,7 +135,7 @@ class _HomePageState extends State<HomePage> {
                                 showMaterialModalBottomSheet(context: context, builder: (context)=> SingleChildScrollView(
                                   controller: ModalScrollController.of(context), //quản lí hành vi cuộn trong ListView
                                   child: Container(
-                                    height: size.height * .4,
+                                    height: size.height * .7,
                                     padding: const EdgeInsets.symmetric(
                                       horizontal: 20,
                                       vertical: 10,
@@ -294,7 +294,7 @@ class _HomePageState extends State<HomePage> {
                   String forecastTemperature = hourlyWeatherForecast[index]['temp_c'].round().toString();
                   print(forecastTime);                  
                   return Container(
-                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
                     margin: const EdgeInsets.only(right: 20),
                     width: 65,
                     decoration: BoxDecoration(
@@ -314,7 +314,7 @@ class _HomePageState extends State<HomePage> {
                         Text('$forecastTime',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 17,
+                            fontSize: 14,
                             color: _constants.greyColor,
                           )
                         ),
@@ -327,14 +327,14 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: _constants.greyColor,
-                            fontSize: 17,
+                            fontSize: 14,
                             )
                           ),
                           Text('o',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: _constants.greyColor,
-                            fontSize: 9,
+                            fontSize: 7,
                             )
                           ),
                         ],)

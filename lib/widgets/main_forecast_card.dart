@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../Models/weather_forecast.dart';
+import '../Models/weather_forecast_day.dart';
 import '../constants/color_constants.dart';
 import '../controller/weather_controller.dart';
 import '../widgets/weather_item.dart';
@@ -15,21 +15,10 @@ class MainForecastCard extends StatelessWidget {
 
   final Constants _constants = Constants();
 
-  final double width;
-  final double height;
   int index;
-  // var dailyWeatherForecast;  
-  // String weatherIcon;
-  // String weatherName;
-  // int avgTemp;
-  // int maxWindSpeed;
-  // int avgHumidity;
-  // int chanceOfRain;
 
   MainForecastCard({
     Key? key,
-    required this.width,
-    required this.height,
     required this.index,
   }) : super(key: key){
     forecastDayData = ForecastDayData(index: index, dailyWeatherForecast: weatherController.dailyWeatherForecast);
@@ -45,12 +34,11 @@ class MainForecastCard extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-
     return Obx(()=>
             Container(
-              width: width,
-              height: height,
-              margin: EdgeInsets.only(top:70),
+              width: MediaQuery.of(context).size.width*0.9,
+              height: MediaQuery.of(context).size.height*0.4,
+              margin: EdgeInsets.only(top:40),
               decoration: BoxDecoration(
               gradient: _constants.linearGradientLightBlue,
               borderRadius: BorderRadius.circular(20),

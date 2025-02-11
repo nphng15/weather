@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../constants/color_constants.dart';
 import '../widgets/main_forecast_card.dart';
-
+import '../widgets/mini_forecast_card.dart';
 
 class ForecastPage extends StatelessWidget {
   const ForecastPage({super.key});
@@ -50,18 +50,10 @@ class ForecastPage extends StatelessWidget {
           Align(
             child: Column(
               children: [
-                MainForecastCard(
-                  width: size.width*0.9,
-                  height: size.height*0.4,
-                  index: 0,
-                  // dailyWeatherForecast : dailyWeatherForecast,
-                  // weatherIcon : forecastData['weatherIcon'],
-                  // weatherName: forecastData['weatherName'],
-                  // avgTemp : forecastData['avgTemp'],
-                  // maxWindSpeed : forecastData['maxWindSpeed'],
-                  // avgHumidity : forecastData['avgHumidity'],
-                  // chanceOfRain : forecastData['chanceOfRain'],
-                )
+                MainForecastCard(index: 0),
+                MiniForecastCard(index: 0),
+                MiniForecastCard(index: 1),
+                MiniForecastCard(index: 2),
               ],
             ),
           )
