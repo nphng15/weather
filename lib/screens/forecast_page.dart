@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:flutter/widgets.dart';
 import '../constants/color_constants.dart';
 import '../widgets/main_forecast_card.dart';
+import '../widgets/mini_forecast_card.dart';
 
 class ForecastPage extends StatelessWidget {
+  const ForecastPage({super.key});
+
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size; 
-    
-    var dailyWeatherForecast = Get.arguments;
-
     Constants _constants = Constants();
-  
+
+    // var dailyWeatherForecast = weatherController.dailyWeatherForecast;
+    // var forecastData = getForecastWeather(dailyWeatherForecast, 0);
+
     return Scaffold(
       backgroundColor: _constants.primaryColor,
       appBar: AppBar(
@@ -49,11 +50,10 @@ class ForecastPage extends StatelessWidget {
           Align(
             child: Column(
               children: [
-                // MainForecastCard(
-                //   width: size.width*0.9,
-                //   height: size.height*0.4,
-                //   dailyWeatherForecast : dailyWeatherForecast,
-                // )
+                MainForecastCard(index: 0),
+                MiniForecastCard(index: 0),
+                MiniForecastCard(index: 1),
+                MiniForecastCard(index: 2),
               ],
             ),
           )
