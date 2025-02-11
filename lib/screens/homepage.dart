@@ -8,6 +8,7 @@ import 'package:my_weather/widgets/weather_item.dart';
 import '../constants/color_constants.dart'; 
 import 'package:get/get.dart';
 import 'forecast_page.dart';
+import '../controller/weather_controller.dart';
 
 class HomePage extends StatefulWidget{
   const HomePage({super.key});
@@ -17,11 +18,12 @@ class HomePage extends StatefulWidget{
 
 class _HomePageState extends State<HomePage> {
   TextEditingController _cityController = TextEditingController();
+  WeatherController weatherController = Get.put(WeatherController());
 
   static String API_KEY = '9de8a43a987d4ab79b3140746252301';
   
   //Default Location
-  String location = 'London'; 
+  String location = 'Thu Duc'; 
   String weatherIcon = 'heavycloud.png';
   int temperature = 0;
   int windSpeed = 0;
@@ -45,7 +47,6 @@ class _HomePageState extends State<HomePage> {
       var locationData = weatherData["location"];
       var currentWeather = weatherData["current"];
 
-
       setState(() {
           location = locationData["name"];
           
@@ -65,6 +66,8 @@ class _HomePageState extends State<HomePage> {
           //forecast data
           dailyWeatherForecast = weatherData['forecast']['forecastday'];
           hourlyWeatherForecast = dailyWeatherForecast[0]['hour'];
+
+          weatherController.updateForecastData(dailyWeatherForecast); 
       });
     } catch(err){//
     }
@@ -159,7 +162,7 @@ class _HomePageState extends State<HomePage> {
                                               onPressed: ()=> _cityController.clear(), 
                                               icon: Icon(Icons.close, color: _constants.primaryColor),
                                               ),
-                                              hintText: 'Search city... e.g. Hang MU',
+                                              hintText: 'Search city... e.g. Ha Noi,...',
                                               hintStyle: TextStyle(
                                                 fontWeight: FontWeight.w400,
                                                 fontStyle: FontStyle.italic,
@@ -258,7 +261,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 GestureDetector(
-                  onTap:() => Get.to(ForecastPage(), arguments: dailyWeatherForecast),
+                  onTap:() => Get.to(ForecastPage()),
                   child: Text('Forecast', 
                     style: TextStyle(
                       decoration: TextDecoration.underline,
