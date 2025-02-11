@@ -23,4 +23,9 @@ class Constants {
       colors: [Color(0xff51087E), Color(0xff6C0BA9)],
       stops: [0.0,1.0]
   );
+  final linearGradientLightBlue = const LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.center,
+    colors: [Color(0xffa9c1f5), Color(0xff6696f5)]
+  );
 }

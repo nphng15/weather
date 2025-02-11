@@ -3,6 +3,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import '/screens/homepage.dart';
 import 'scroll_behavior.dart';
+import 'package:get/get.dart';
 void main() {
   runApp(
     DevicePreview(
@@ -19,8 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return MaterialApp(
-          resizeToAvoidBottomInset: true,
+    return GetMaterialApp(
       scrollBehavior: MyCustomScrollBehavior(),
       debugShowCheckedModeBanner: false,
       title: 'Weather',

@@ -4,17 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http; //api
 import 'package:intl/intl.dart'; //date format
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:my_weather/widgets/weather_item.dart';
 import '../constants/color_constants.dart'; 
-// import '/assets';
-
-class Forecast extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
-  }
-
-}
+import 'package:get/get.dart';
+import 'forecast_page.dart';
 
 class HomePage extends StatefulWidget{
   const HomePage({super.key});
@@ -73,7 +66,7 @@ class _HomePageState extends State<HomePage> {
           dailyWeatherForecast = weatherData['forecast']['forecastday'];
           hourlyWeatherForecast = dailyWeatherForecast[0]['hour'];
       });
-    } catch(err){//nnn
+    } catch(err){//
     }
   }
 
@@ -87,7 +80,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     //lay kich thuoc man hinh tuy theo thiet bi
     Size size = MediaQuery.of(context).size; 
-  
     Constants _constants = Constants();
 
     return Scaffold(
@@ -105,7 +97,7 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               height: size.height * .7,
               decoration: BoxDecoration(
-                gradient: _constants.linearGradientBlue,
+                gradient: _constants.linearGradientLightBlue,
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
@@ -246,42 +238,9 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Column(
-                      children: [
-                        Image.asset("assets/windspeed.png", width: 40, height: 40,),
-                        Text('$windSpeed\km/h', 
-                          style: TextStyle(
-                            color: Colors.white, 
-                            fontSize: 16, 
-                            fontWeight: FontWeight.bold
-                          ),
-                        )
-                      ]
-                    ),
-                      Column(
-                      children: [
-                        Image.asset("assets/humidity.png", width: 40, height: 40,),
-                        Text('$humidity\%', 
-                          style: TextStyle(
-                            color: Colors.white, 
-                            fontSize: 16, 
-                            fontWeight: FontWeight.bold
-                          ),
-                        )
-                      ]
-                    ),
-                      Column(
-                      children: [
-                        Image.asset("assets/cloud.png", width: 40, height: 40,),
-                        Text('$windSpeed\%', 
-                          style: TextStyle(
-                            color: Colors.white, 
-                            fontSize: 16, 
-                            fontWeight: FontWeight.bold
-                          ),
-                        )
-                      ]
-                    ),
+                      WeatherItem(value: windSpeed, unit: 'km/h', imageUrl: 'assets/windspeed.png'),
+                      WeatherItem(value: humidity, unit: '%', imageUrl: 'assets/humidity.png'),
+                      WeatherItem(value: cloud, unit: '%', imageUrl: 'assets/cloud.png'),
                   ],)
                 ],
               ),
@@ -299,7 +258,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () => NavigationBar(destinations: [Forecast()],),
+                  onTap:() => Get.to(ForecastPage(), arguments: dailyWeatherForecast),
                   child: Text('Forecast', 
                     style: TextStyle(
                       decoration: TextDecoration.underline,
