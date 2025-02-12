@@ -1,14 +1,13 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http; //api
 import 'package:intl/intl.dart'; //date format
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:my_weather/widgets/weather_item.dart';
 import '../constants/color_constants.dart'; 
 import 'package:get/get.dart';
-import 'forecast_page.dart';
 import '../controller/weather_controller.dart';
+import 'package:my_weather/routes/routes.dart';
 
 class HomePage extends StatefulWidget{
   const HomePage({super.key});
@@ -261,7 +260,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 GestureDetector(
-                  onTap:() => Get.to(ForecastPage()),
+                  onTap:() => Get.toNamed(RoutesClass.forecast),
                   child: Text('Forecast', 
                     style: TextStyle(
                       decoration: TextDecoration.underline,
@@ -291,8 +290,7 @@ class _HomePageState extends State<HomePage> {
                   
                   String forecastWeatherName = hourlyWeatherForecast[index]['condition']['text'];
                   String forecastWeatherIcon = forecastWeatherName.replaceAll(' ', '').toLowerCase()+'.png';
-                  String forecastTemperature = hourlyWeatherForecast[index]['temp_c'].round().toString();
-                  print(forecastTime);                  
+                  String forecastTemperature = hourlyWeatherForecast[index]['temp_c'].round().toString();                
                   return Container(
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     margin: const EdgeInsets.only(right: 20),
