@@ -8,7 +8,7 @@ class RoutesClass{
   static String forecast = '/forecast';
 
   static List<GetPage> routes = [
-    GetPage(page:()=> const HomePage()  ,name: home),
-    GetPage(page:()=> const ForecastPage() ,name: forecast),
+    GetPage(page:()=> const HomePage(), name: home),
+    GetPage(page:()=> const ForecastPage(), name: forecast),
   ];
 }

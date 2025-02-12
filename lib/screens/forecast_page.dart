@@ -51,9 +51,16 @@ class ForecastPage extends StatelessWidget {
             child: Column(
               children: [
                 MainForecastCard(index: 0),
-                MiniForecastCard(index: 0),
-                MiniForecastCard(index: 1),
-                MiniForecastCard(index: 2),
+                const SizedBox(height: 10,),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width*0.9,
+                  height: MediaQuery.of(context).size.height*0.4,
+                  child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: 3,
+                    itemBuilder: (context, index) => MiniForecastCard(index: index),
+                  ),
+                ),      
               ],
             ),
           )
