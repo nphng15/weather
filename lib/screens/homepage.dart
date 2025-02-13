@@ -1,14 +1,13 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http; //api
 import 'package:intl/intl.dart'; //date format
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:my_weather/widgets/weather_item.dart';
 import '../constants/color_constants.dart'; 
 import 'package:get/get.dart';
-import 'forecast_page.dart';
 import '../controller/weather_controller.dart';
+import 'package:my_weather/routes/routes.dart';
 
 class HomePage extends StatefulWidget{
   const HomePage({super.key});
@@ -17,7 +16,7 @@ class HomePage extends StatefulWidget{
 }
 
 class _HomePageState extends State<HomePage> {
-  TextEditingController _cityController = TextEditingController();
+  final TextEditingController _cityController = TextEditingController();
   WeatherController weatherController = Get.put(WeatherController());
 
   static String API_KEY = '9de8a43a987d4ab79b3140746252301';
@@ -57,7 +56,7 @@ class _HomePageState extends State<HomePage> {
           
           //update weather
           currentWeatherStatus = currentWeather['condition']['text'];
-          weatherIcon = currentWeatherStatus.replaceAll(' ','').toLowerCase() + '.png';
+          weatherIcon = '${currentWeatherStatus.replaceAll(' ','').toLowerCase()}.png';
           temperature = currentWeather['temp_c'].toInt();
           windSpeed = currentWeather['wind_kph'].toInt();
           humidity = currentWeather['humidity'].toInt();
@@ -163,7 +162,7 @@ class _HomePageState extends State<HomePage> {
                                               icon: Icon(Icons.close, color: _constants.primaryColor),
                                               ),
                                               hintText: 'Search city... e.g. Ha Noi,...',
-                                              hintStyle: TextStyle(
+                                              hintStyle: const TextStyle(
                                                 fontWeight: FontWeight.w400,
                                                 fontStyle: FontStyle.italic,
                                                 color: Colors.grey,
@@ -219,7 +218,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
-                  Text('$currentWeatherStatus', 
+                  Text(currentWeatherStatus, 
                     style: TextStyle(
                       fontSize: 20,
                       color: _constants.secondaryColor,
@@ -254,14 +253,14 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                Text('Today',
+                const Text('Today',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 GestureDetector(
-                  onTap:() => Get.to(ForecastPage()),
+                  onTap:() => Get.toNamed(RoutesClass.forecast),
                   child: Text('Forecast', 
                     style: TextStyle(
                       decoration: TextDecoration.underline,
@@ -290,9 +289,8 @@ class _HomePageState extends State<HomePage> {
                   String forecastTime = hourlyWeatherForecast[index]['time'].substring(11,16);
                   
                   String forecastWeatherName = hourlyWeatherForecast[index]['condition']['text'];
-                  String forecastWeatherIcon = forecastWeatherName.replaceAll(' ', '').toLowerCase()+'.png';
-                  String forecastTemperature = hourlyWeatherForecast[index]['temp_c'].round().toString();
-                  print(forecastTime);                  
+                  String forecastWeatherIcon = '${forecastWeatherName.replaceAll(' ', '').toLowerCase()}.png';
+                  String forecastTemperature = hourlyWeatherForecast[index]['temp_c'].round().toString();                
                   return Container(
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     margin: const EdgeInsets.only(right: 20),
@@ -311,7 +309,7 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('$forecastTime',
+                        Text(forecastTime,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 14,
@@ -323,7 +321,7 @@ class _HomePageState extends State<HomePage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                          Text('$forecastTemperature',
+                          Text(forecastTemperature,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: _constants.greyColor,
