@@ -59,7 +59,7 @@ class MiniForecastCard extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                     Row(
                       children: [
                         Image.asset('assets/${forecastDayData.weatherIcon}',width: 30, height: 30,),
