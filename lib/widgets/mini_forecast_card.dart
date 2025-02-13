@@ -31,7 +31,7 @@ class MiniForecastCard extends StatelessWidget {
           width: MediaQuery.of(context).size.width*0.9,
           height: MediaQuery.of(context).size.height*0.09,
           decoration: BoxDecoration(
-            border: Border.all(color: (mainIndex == index) ? _constants.primaryColor : _constants.greyColor),
+            border: Border.all(color: (mainIndex == index) ? _constants.primaryColor : _constants.greyColor,),
             color: _constants.greyColor,
             borderRadius: BorderRadius.circular(15),
             boxShadow: [
