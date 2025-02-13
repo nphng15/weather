@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../constants/color_constants.dart';
 import '../widgets/main_forecast_card.dart';
 import '../widgets/mini_forecast_card.dart';
-
+import  '../controller/mainCard_controller.dart';
 class ForecastPage extends StatelessWidget {
   const ForecastPage({super.key});
-
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size; 
     Constants _constants = Constants();
+
+    mainCardController mainCard = Get.put(mainCardController());
 
     // var dailyWeatherForecast = weatherController.dailyWeatherForecast;
     // var forecastData = getForecastWeather(dailyWeatherForecast, 0);
@@ -47,21 +49,27 @@ class ForecastPage extends StatelessWidget {
               ), 
             ),
           ),
-          Align(
-            child: Column(
-              children: [
-                MainForecastCard(index: 0),
-                const SizedBox(height: 10,),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width*0.9,
-                  height: MediaQuery.of(context).size.height*0.4,
-                  child: ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: 3,
-                    itemBuilder: (context, index) => MiniForecastCard(index: index),
-                  ),
-                ),      
-              ],
+          Obx(()=>
+            Align(
+              child: Column(
+                children: [
+                  MainForecastCard(index: mainCard.mainIndex.value),
+                  const SizedBox(height: 10,),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width*0.9,
+                    height: MediaQuery.of(context).size.height*0.4,
+                    child: ListView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: 3,
+                      itemBuilder: (context, index) => ListTile(
+                        contentPadding: EdgeInsets.zero,//bo padding
+                        title: MiniForecastCard(index: index, mainIndex: mainCard.mainIndex.value),
+                        onTap: () => mainCard.changeIndex(index),
+                      ),
+                    ),
+                  ),      
+                ],
+              ),
             ),
           )
         ],

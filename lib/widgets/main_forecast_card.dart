@@ -62,15 +62,20 @@ class MainForecastCard extends StatelessWidget {
                           Container(
                             padding: EdgeInsets.all(18),
                             child: SizedBox(
-                              width: 150,
-                              child: Image.asset('assets/' + forecastDayData.weatherIcon.value),
+                              width: 100,
+                              child: Image.asset('assets/' + forecastDayData.weatherIcon.value,),
                             ),
                           ),
-                          Text('${forecastDayData.weatherName.value}',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: _constants.secondaryColor,
+                          SizedBox(
+                            width: 150,
+                            child: Text('${forecastDayData.weatherName.value}',
+                              textAlign: TextAlign.center,
+                              softWrap: true,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: _constants.secondaryColor,
+                              ),
                             ),
                           )
                         ],
